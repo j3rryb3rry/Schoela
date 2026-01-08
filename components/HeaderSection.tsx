@@ -46,32 +46,31 @@ export const HeaderSection: React.FC = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.1 });
       
-      // 1. Initial background line
+      // 1. Initial background line arrival
       tl.fromTo(lineRef.current, 
         { scaleX: 0, transformOrigin: "center" }, 
-        { scaleX: 1, duration: 1.4, ease: "expo.inOut" }
+        { scaleX: 1, duration: 1.6, ease: "expo.inOut" }
       );
 
-      // 2. Eyebrow animation
+      // 2. Eyebrow arrival
       tl.fromTo(eyebrowRef.current?.querySelectorAll('.eyebrow-content'), 
-        { opacity: 0, y: 12, filter: 'blur(10px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, stagger: 0.12, ease: "power4.out" },
-        "-=0.8"
+        { opacity: 0, y: 15, filter: 'blur(12px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.15, ease: "power3.out" },
+        "-=1.0"
       );
 
-      // 3. Smoother H1 Animation: Word-by-word with aesthetic character blur
+      // 3. Main H1: Ultra-Smooth Word-by-Word with character stagger
       const words = h1Ref.current?.querySelectorAll('.word');
       if (words && words.length > 0) {
         words.forEach((word, wordIdx) => {
           const chars = word.querySelectorAll('.char');
           
-          // Smoother, more graceful transition
           tl.fromTo(chars,
             { 
               opacity: 0, 
-              y: 25, 
-              filter: 'blur(18px)',
-              scale: 1.02,
+              y: 20, 
+              filter: 'blur(20px)',
+              scale: 1.01,
               transformOrigin: "center center"
             },
             { 
@@ -79,41 +78,41 @@ export const HeaderSection: React.FC = () => {
               y: 0, 
               filter: 'blur(0px)',
               scale: 1,
-              duration: 1.3, 
-              stagger: 0.035, // Tighter stagger for a more "flowing" look
-              ease: "power3.out" // Smoother easing than expo for a softer landing
+              duration: 1.5, // Slower for premium smoothness
+              stagger: 0.03, // Delicate flow
+              ease: "power2.out" // Softer landing
             },
-            wordIdx === 0 ? "-=0.6" : "-=1.05" // Overlap words for a continuous but rhythmic feel
+            wordIdx === 0 ? "-=0.8" : "-=1.35" // Deep overlap for fluid transition
           );
         });
       }
 
-      // 4. Content fade in (Subheadline)
+      // 4. Subheadline appearance
       tl.fromTo(mainContentRef.current?.querySelector('.subheadline'),
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" },
-        "-=1.1"
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" },
+        "-=1.2"
       );
 
-      // 5. Grid items stagger
+      // 5. Grid items entry
       const items = bulletsContainerRef.current?.querySelectorAll('.bullet-item');
       if (items) {
         gsap.fromTo(items, 
           { 
             opacity: 0, 
-            y: 25, 
-            scale: 0.98,
-            filter: 'blur(12px)' 
+            y: 20, 
+            scale: 0.99,
+            filter: 'blur(10px)' 
           },
           {
             opacity: 1,
             y: 0,
             scale: 1,
             filter: 'blur(0px)',
-            duration: 1.5,
-            stagger: 0.1,
+            duration: 1.8,
+            stagger: 0.12,
             ease: "power3.out",
-            delay: 0.7
+            delay: 0.8
           }
         );
       }
@@ -155,7 +154,7 @@ export const HeaderSection: React.FC = () => {
       >
         
         {/* Editorial Eyebrow */}
-        <div ref={eyebrowRef} className="mb-8 sm:mb-10 flex flex-col items-center gap-4">
+        <div ref={eyebrowRef} className="mb-8 sm:mb-12 flex flex-col items-center gap-4">
           <div className="flex items-center gap-4 eyebrow-content">
             <span className="text-blue-400 text-[10px] font-black tracking-[1em] uppercase leading-none opacity-80">
               STRATEGIC SCALING
@@ -167,8 +166,8 @@ export const HeaderSection: React.FC = () => {
           </span>
         </div>
 
-        {/* GSAP Word-by-Word Animated Headline - Adjusted max-w for 3 lines on Desktop */}
-        <div className="mb-8 sm:mb-10 w-full max-w-[340px] sm:max-w-2xl md:max-w-3xl lg:max-w-[1000px] px-2 sm:px-0">
+        {/* GSAP Word-by-Word Animated Headline - Optimized for 3 lines on Desktop */}
+        <div className="mb-10 sm:mb-12 w-full max-w-[320px] sm:max-w-2xl md:max-w-3xl lg:max-w-[840px] px-2 sm:px-0">
           <h1 
             ref={h1Ref} 
             className="text-[34px] sm:text-6xl md:text-7xl lg:text-[82px] font-black tracking-tight sm:tracking-tighter leading-[1.1] sm:leading-[1.05] uppercase text-white drop-shadow-[0_15px_40px_rgba(0,0,0,0.7)] flex flex-wrap justify-center overflow-visible"
@@ -185,17 +184,17 @@ export const HeaderSection: React.FC = () => {
           </h1>
         </div>
 
-        <p className="subheadline w-full max-w-3xl text-sm sm:text-lg md:text-xl text-slate-200/90 leading-relaxed font-semibold tracking-tight mb-14 sm:mb-16 balance px-6 sm:px-4 opacity-0">
+        <p className="subheadline w-full max-w-3xl text-sm sm:text-lg md:text-xl text-slate-200/90 leading-relaxed font-semibold tracking-tight mb-16 sm:mb-20 balance px-6 sm:px-4 opacity-0">
           Vollständiges Management von der Analyse bis zur Marktführerschaft. <br className="hidden sm:block" />
           Wir sichern Ihren Erfolg durch datenbasierte Präzision.
         </p>
 
         <div 
           ref={bulletsContainerRef}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-20 sm:mb-24 w-full max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-24 sm:mb-32 w-full max-w-5xl mx-auto"
         >
           {bulletItems.map((item, idx) => (
-            <div key={idx} className="bullet-item group relative flex flex-col items-start text-left p-6 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-white/[0.08] border border-white/20 backdrop-blur-3xl hover:bg-white/[0.12] hover:border-blue-400/60 transition-all duration-1000 overflow-hidden cursor-default shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+            <div key={idx} className="bullet-item group relative flex flex-col items-start text-left p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-white/[0.08] border border-white/20 backdrop-blur-3xl hover:bg-white/[0.12] hover:border-blue-400/60 transition-all duration-1000 overflow-hidden cursor-default shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
               
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-blue-500/[0.12] blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               

@@ -1,0 +1,15 @@
+
+.scroll-reveal {
+  display: block;
+  position: relative;
+}
+
+.scroll-reveal-text {
+  display: block;
+  width: 100%;
+}
+
+.word {
+  display: inline-block;
+  white-space: pre;
+}
